@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoFazenda: Agrinho 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
     <style>
         /* Estilização do Site (CSS) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background-color: #ffebee;
+            color: #c62828;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #2e7d32;
-            color: white;
+            background-color: #c62828;
+            color: black;
             text-align: center;
             padding: 20px;
         }
@@ -37,7 +38,7 @@
         .status-panel {
             display: flex;
             justify-content: space-around;
-            background-color: #f1f8e9;
+            background-color: #ffcdd2;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
@@ -49,15 +50,15 @@
         /* Tela do Jogo */
         .game-screen {
             text-align: center;
-            border: 2px dashed #81c784;
+            border: 2px dashed #e57373;
             padding: 30px;
             border-radius: 8px;
             min-height: 200px;
         }
 
         .btn {
-            background-color: #4caf50;
-            color: white;
+            background-color: #d32f2f;
+            color: black;
             border: none;
             padding: 12px 24px;
             font-size: 16px;
@@ -67,7 +68,7 @@
             transition: 0.2s;
         }
 
-        .btn:hover { background-color: #388e3c; }
+        .btn:hover { background-color: #b71c1c; }
         .btn-danger { background-color: #e53935; }
         .btn-danger:hover { background-color: #c62828; }
 
@@ -76,6 +77,17 @@
             padding: 20px;
             font-size: 14px;
             color: #666;
+        }
+
+        .welcome-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .btn-grand-hotel {
+            font-family: 'Grand Hotel', cursive;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -94,14 +106,14 @@
         </div>
 
         <div class="game-screen" id="tela-jogo">
-            <h2>Bem-vindo à sua EcoFazenda!</h2>
+            <h2 class="welcome-title">Bem-vindo à sua EcoFazenda!</h2>
             <p>Sua missão é produzir alimentos e levá-los ao mercado mantendo o equilíbrio ecológico e financeiro.</p>
-            <button class="btn" onclick="proximaFase('pomar')">Começar Desafio</button>
+            <button class="btn btn-grand-hotel" onclick="proximaFase('pomar')">Começar Desafio</button>
         </div>
     </div>
 
     <footer>
-        Projeto Desenvolvido para o Concurso Agrinho 2026.
+        Projeto Desenvolvido para o Concurso Agrinho 2026 | Desenvolvido por Livia Maria Claro
     </footer>
 
     <script>
@@ -158,6 +170,78 @@
                     <button class="btn" onclick="escolha('local')">Vender para Comércio Local (Menos transporte, menor pegada de carbono)</button>
                 `;
             }
+
+            else if (fase === 'irrigacao') {
+                tela.innerHTML = `
+                    <h3>Fase 4: Sistema de Irrigação</h3>
+                    <p>A seca ameaça sua plantação! Como você vai irrigar a terra?</p>
+                    <button class="btn" onclick="escolha('pivô')">Pivô Central com Muita Água (Caro, desperdiça água)</button>
+                    <button class="btn" onclick="escolha('gotejamento')">Sistema de Gotejamento (Economiza água, mais sustentável)</button>
+                `;
+            }
+
+            else if (fase === 'energia') {
+                tela.innerHTML = `
+                    <h3>Fase 5: Energia na Fazenda</h3>
+                    <p>Você precisa de energia para as máquinas. Qual a melhor opção?</p>
+                    <button class="btn" onclick="escolha('diesel')">Gerador a Diesel (Barato, poluente)</button>
+                    <button class="btn" onclick="escolha('solar')">Placa Solar + Eólica (Caro no início, sustentável)</button>
+                `;
+            }
+
+            else if (fase === 'solo') {
+                tela.innerHTML = `
+                    <h3>Fase 6: Manejo do Solo</h3>
+                    <p>O solo está cansado após vários plantios. Como restaurar a fertilidade?</p>
+                    <button class="btn" onclick="escolha('fertilizante')">Fertilizante Químico Intensivo (Rápido, prejudica solo)</button>
+                    <button class="btn" onclick="escolha('rotacao')">Rotação de Culturas + Compostagem (Lento, nutre naturalmente)</button>
+                `;
+            }
+
+            else if (fase === 'residuos') {
+                tela.innerHTML = `
+                    <h3>Fase 7: Gestão de Resíduos</h3>
+                    <p>Sobrou muito lixo orgânico da colheita. O que fazer com isso?</p>
+                    <button class="btn" onclick="escolha('queima')">Queimar os Resíduos (Rápido, polui o ar)</button>
+                    <button class="btn" onclick="escolha('bioenergia')">Usar para Bioenergia + Composto (Renda extra, sustentável)</button>
+                `;
+            }
+
+            else if (fase === 'certificacao') {
+                tela.innerHTML = `
+                    <h3>Fase 8: Certificação Orgânica</h3>
+                    <p>Você está pronto para ser certificado como produtor orgânico?</p>
+                    <button class="btn" onclick="escolha('convencional')">Permanecer Convencional (Sem custos de certificação)</button>
+                    <button class="btn" onclick="escolha('organico')">Buscar Certificação Orgânica (Maior valor no mercado)</button>
+                `;
+            }
+
+            else if (fase === 'agua') {
+                tela.innerHTML = `
+                    <h3>Fase 9: Conservação de Água</h3>
+                    <p>Fonte de água está comprometida. Como você vai garantir água limpa?</p>
+                    <button class="btn" onclick="escolha('poco')">Perfurar Poço Profundo (Rápido, risco de contaminação)</button>
+                    <button class="btn" onclick="escolha('cisternas')">Cisterna de Captação de Chuva (Sustentável, natural)</button>
+                `;
+            }
+
+            else if (fase === 'comunidade') {
+                tela.innerHTML = `
+                    <h3>Fase 10: Educação e Comunidade</h3>
+                    <p>Como você quer contribuir com a comunidade rural?</p>
+                    <button class="btn" onclick="escolha('isolado')">Focar Apenas na Sua Produção (Mais lucro individual)</button>
+                    <button class="btn" onclick="escolha('cooperativa')">Formar Cooperativa com Vizinhos (Compartilhar conhecimento e lucros)</button>
+                `;
+            }
+
+            else if (fase === 'turismo') {
+                tela.innerHTML = `
+                    <h3>Fase 11: Turismo Rural e Educação Ambiental</h3>
+                    <p>Sua fazenda pode ensinar sustentabilidade ao mundo. Qual é sua escolha final?</p>
+                    <button class="btn" onclick="escolha('industrial')">Expandir Produção Industrial (Máximo lucro)</button>
+                    <button class="btn" onclick="escolha('ecoturismo')">Abrir para Turismo Educacional (Conscientizar novos agricultores)</button>
+                `;
+            }
         }
 
         // Processa as escolhas do jogador
@@ -191,12 +275,115 @@
             else if (opcao === 'caminhao') {
                 dinheiro += 50;
                 planeta -= 20;
-                fimDeJogoVitoria();
+                tela.innerHTML = `<p>O caminhão antigo poluiu bastante na viagem, mas você lucrou bem...</p>
+                                  <button class="btn" onclick="proximaFase('irrigacao')">Continuar</button>`;
             }
             else if (opcao === 'local') {
                 dinheiro += 35;
                 planeta += 15;
-                fimDeJogoVitoria();
+                tela.innerHTML = `<p>Que sucesso! Vender localmente reduz a pegada de carbono e mantém a comunidade forte.</p>
+                                  <button class="btn" onclick="proximaFase('irrigacao')">Continuar</button>`;
+            }
+            else if (opcao === 'pivô') {
+                dinheiro -= 25;
+                planeta -= 15;
+                tela.innerHTML = `<p>O sistema funcionou, mas gastou muita água. Preocupação com a escassez de recursos...</p>
+                                  <button class="btn" onclick="proximaFase('energia')">Continuar</button>`;
+            }
+            else if (opcao === 'gotejamento') {
+                dinheiro -= 40;
+                planeta += 10;
+                animais += 10;
+                tela.innerHTML = `<p>Excelente! Menos desperdício de água. A plantação cresce saudável e sustentável.</p>
+                                  <button class="btn" onclick="proximaFase('energia')">Continuar</button>`;
+            }
+            else if (opcao === 'diesel') {
+                dinheiro -= 15;
+                planeta -= 20;
+                tela.innerHTML = `<p>Suas máquinas funcionam, mas a fumaça do gerador prejudica o ar local...</p>
+                                  <button class="btn" onclick="proximaFase('solo')">Continuar</button>`;
+            }
+            else if (opcao === 'solar') {
+                dinheiro -= 60;
+                planeta += 25;
+                tela.innerHTML = `<p>Investimento alto, mas você agora tem energia limpa! O planeta agradece.</p>
+                                  <button class="btn" onclick="proximaFase('solo')">Continuar</button>`;
+            }
+            else if (opcao === 'fertilizante') {
+                dinheiro += 20;
+                planeta -= 25;
+                tela.innerHTML = `<p>O solo recuperou-se rapidamente, mas a qualidade ficou comprometida...</p>
+                                  <button class="btn" onclick="proximaFase('residuos')">Continuar</button>`;
+            }
+            else if (opcao === 'rotacao') {
+                dinheiro -= 10;
+                planeta += 20;
+                animais += 15;
+                tela.innerHTML = `<p>Perfeito! O solo se regenera naturalmente. A fazenda está verdadeiramente sustentável!</p>
+                                  <button class="btn" onclick="proximaFase('residuos')">Continuar</button>`;
+            }
+            else if (opcao === 'queima') {
+                dinheiro += 5;
+                planeta -= 15;
+                tela.innerHTML = `<p>Depressa resolvido, mas a poluição do ar afeta toda a região...</p>
+                                  <button class="btn" onclick="proximaFase('certificacao')">Continuar</button>`;
+            }
+            else if (opcao === 'bioenergia') {
+                dinheiro += 45;
+                planeta += 10;
+                tela.innerHTML = `<p>Que inteligente! Você gera energia, adubo e ainda lucra com os resíduos!</p>
+                                  <button class="btn" onclick="proximaFase('certificacao')">Continuar</button>`;
+            }
+            else if (opcao === 'convencional') {
+                dinheiro += 30;
+                planeta -= 10;
+                tela.innerHTML = `<p>Você continua com produção convencional. Lucro agora, mas questões de sustentabilidade...</p>
+                                  <button class="btn" onclick="proximaFase('agua')">Continuar</button>`;
+            }
+            else if (opcao === 'organico') {
+                dinheiro += 60;
+                planeta += 30;
+                animais += 20;
+                tela.innerHTML = `<p>Parabéns! Você agora é um produtor ORGÂNICO CERTIFICADO! O futuro do agro é seu!</p>
+                                  <button class="btn" onclick="proximaFase('agua')">Continuar</button>`;
+            }
+            else if (opcao === 'poco') {
+                dinheiro -= 20;
+                planeta -= 15;
+                tela.innerHTML = `<p>O poço fornece água, mas há risco de contaminação do lençol freático...</p>
+                                  <button class="btn" onclick="proximaFase('comunidade')">Continuar</button>`;
+            }
+            else if (opcao === 'cisternas') {
+                dinheiro -= 15;
+                planeta += 20;
+                tela.innerHTML = `<p>Excelente! Você aproveita a chuva de forma sustentável. Água sem risco!</p>
+                                  <button class="btn" onclick="proximaFase('comunidade')">Continuar</button>`;
+            }
+            else if (opcao === 'isolado') {
+                dinheiro += 40;
+                planeta -= 5;
+                tela.innerHTML = `<p>Você maximi seu lucro individual, mas perde oportunidades de crescimento comunitário...</p>
+                                  <button class="btn" onclick="proximaFase('turismo')">Continuar</button>`;
+            }
+            else if (opcao === 'cooperativa') {
+                dinheiro += 50;
+                planeta += 15;
+                animais += 10;
+                tela.innerHTML = `<p>Que visão! Juntos, vocês compartilham máquinas, conhecimento e lucram mais de forma sustentável!</p>
+                                  <button class="btn" onclick="proximaFase('turismo')">Continuar</button>`;
+            }
+            else if (opcao === 'industrial') {
+                dinheiro += 80;
+                planeta -= 30;
+                tela.innerHTML = `<p>Seu lucro é impressionante, mas a natureza sofre as consequências...</p>
+                                  <button class="btn" onclick="fimDeJogoVitoria()">Terminar Jogo</button>`;
+            }
+            else if (opcao === 'ecoturismo') {
+                dinheiro += 70;
+                planeta += 40;
+                animais += 25;
+                tela.innerHTML = `<p>PARABÉNS! Você criou um modelo PERFEITO de sustentabilidade! Seu exemplo inspira o Brasil inteiro!</p>
+                                  <button class="btn" onclick="fimDeJogoVitoria()">Terminar Jogo</button>`;
             }
 
             atualizarPainel();
