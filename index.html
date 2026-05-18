@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFazenda: Agrinho 2026</title>
+    <style>
+        /* Estilização do Site (CSS) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 { margin: 0; font-size: 24px; }
+        header p { margin: 5px 0 0 0; font-style: italic; }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Painel de Status */
+        .status-panel {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .status-item { text-align: center; }
+
+        /* Tela do Jogo */
+        .game-screen {
+            text-align: center;
+            border: 2px dashed #81c784;
+            padding: 30px;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 10px;
+            transition: 0.2s;
+        }
+
+        .btn:hover { background-color: #388e3c; }
+        .btn-danger { background-color: #e53935; }
+        .btn-danger:hover { background-color: #c62828; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EcoFazenda: Do Campo ao Mercado</h1>
+        <p>Concurso Agrinho 2026 - Agro forte, futuro sustentável</p>
+    </header>
+
+    <div class="container">
+        <div class="status-panel">
+            <div class="status-item">💰 Dinheiro<br><span id="txt-dinheiro">100</span></div>
+            <div class="status-item">🌱 Planeta<br><span id="txt-planeta">50</span>%</div>
+            <div class="status-item">🐾 Bem-Estar<br><span id="txt-animais">50</span>%</div>
+        </div>
+
+        <div class="game-screen" id="tela-jogo">
+            <h2>Bem-vindo à sua EcoFazenda!</h2>
+            <p>Sua missão é produzir alimentos e levá-los ao mercado mantendo o equilíbrio ecológico e financeiro.</p>
+            <button class="btn" onclick="proximaFase('pomar')">Começar Desafio</button>
+        </div>
+    </div>
+
+    <footer>
+        Projeto Desenvolvido para o Concurso Agrinho 2026.
+    </footer>
+
+    <script>
+        // Variáveis de controle do estado do jogo
+        let dinheiro = 100;
+        let planeta = 50;
+        let animais = 50;
+
+        const tela = document.getElementById('tela-jogo');
+
+        // Atualiza os dados na tela
+        function atualizarPainel() {
+            document.getElementById('txt-dinheiro').innerText = dinheiro;
+            document.getElementById('txt-planeta').innerText = planeta;
+            document.getElementById('txt-animais').innerText = animais;
+
+            // Teste de Game Over
+            if (planeta <= 0) {
+                gameOver("Fim de Jogo! O meio ambiente foi totalmente destruído. Sem natureza não há futuro para o agro.");
+            } else if (animais <= 0) {
+                gameOver("Fim de Jogo! Os animais adoeceram devido aos maus-tratos e falta de manejo sustentável.");
+            } else if (dinheiro <= 0) {
+                gameOver("Fim de Jogo! Sua fazenda faliu. É preciso ter lucro para manter a produção ativa.");
+            }
+        }
+
+        // Controla o fluxo das fases
+        function proximaFase(fase) {
+            atualizarPainel();
+
+            if (fase === 'pomar') {
+                tela.innerHTML = `
+                    <h3>Fase 1: O Pomar de Frutas</h3>
+                    <p>Suas laranjeiras estão com pragas! Como você vai resolver o problema?</p>
+                    <button class="btn" onclick="escolha('quimico')">Usar Agrotóxico Pesado (Barato e rápido)</button>
+                    <button class="btn" onclick="escolha('biologico')">Usar Controle Biológico com Joaninhas (Mais caro, mas ecológico)</button>
+                `;
+            } 
+            
+            else if (fase === 'animais') {
+                tela.innerHTML = `
+                    <h3>Fase 2: Criação de Animais</h3>
+                    <p>Como será o manejo das suas vacas leiteiras?</p>
+                    <button class="btn" onclick="escolha('confinado')">Confinamento total (Ganha mais dinheiro, menos espaço)</button>
+                    <button class="btn" onclick="escolha('silvipastoril')">Sistema Silvipastoril - Pasto com Árvores (Conforto térmico e sombra)</button>
+                `;
+            } 
+            
+            else if (fase === 'mercado') {
+                tela.innerHTML = `
+                    <h3>Fase 3: Chegando ao Mercado</h3>
+                    <p>Sua produção de frutas e leite está pronta. Como vai transportar até a cidade?</p>
+                    <button class="btn" onclick="escolha('caminhao')">Caminhão Antigo a Diesel (Poluente)</button>
+                    <button class="btn" onclick="escolha('local')">Vender para Comércio Local (Menos transporte, menor pegada de carbono)</button>
+                `;
+            }
+        }
+
+        // Processa as escolhas do jogador
+        function escolha(opcao) {
+            if (opcao === 'quimico') {
+                dinheiro -= 10;
+                planeta -= 30;
+                tela.innerHTML = `<p>Você eliminou as pragas, mas o veneno contaminou o solo e a água subterrânea...</p>
+                                  <button class="btn" onclick="proximaFase('animais')">Continuar</button>`;
+            } 
+            else if (opcao === 'biologico') {
+                dinheiro -= 30;
+                planeta += 20;
+                tela.innerHTML = `<p>As joaninhas controlaram as pragas naturalmente! O solo continua saudável e rico.</p>
+                                  <button class="btn" onclick="proximaFase('animais')">Continuar</button>`;
+            }
+            else if (opcao === 'confinado') {
+                dinheiro += 40;
+                animais -= 30;
+                planeta -= 10;
+                tela.innerHTML = `<p>A produção aumentou, mas o estresse dos animais subiu e o acúmulo de dejetos poluiu o local.</p>
+                                  <button class="btn" onclick="proximaFase('mercado')">Continuar</button>`;
+            }
+            else if (opcao === 'silvipastoril') {
+                dinheiro -= 20;
+                animais += 30;
+                planeta += 15;
+                tela.innerHTML = `<p>Excelente! As árvores limpam o ar, dão sombra ao gado e o leite sai com muito mais qualidade.</p>
+                                  <button class="btn" onclick="proximaFase('mercado')">Continuar</button>`;
+            }
+            else if (opcao === 'caminhao') {
+                dinheiro += 50;
+                planeta -= 20;
+                fimDeJogoVitoria();
+            }
+            else if (opcao === 'local') {
+                dinheiro += 35;
+                planeta += 15;
+                fimDeJogoVitoria();
+            }
+
+            atualizarPainel();
+        }
+
+        function gameOver(mensagem) {
+            tela.innerHTML = `
+                <h2 style="color: #e53935;">Game Over</h2>
+                <p>${mensagem}</p>
+                <button class="btn btn-danger" onclick="reiniciar()">Tentar Novamente</button>
+            `;
+        }
+
+        function fimDeJogoVitoria() {
+            tela.innerHTML = `
+                <h2>parabéns! Sua produção chegou ao mercado!</h2>
+                <p>Você concluiu o ciclo. Confira seu resultado final nas barras superiores. O segredo do Agrinho é manter tudo em equilíbrio!</p>
+                <button class="btn" onclick="reiniciar()">Jogar de Novo</button>
+            `;
+        }
+
+        function reiniciar() {
+            dinheiro = 100;
+            planeta = 50;
+            animais = 50;
+            proximaFase('pomar');
+        }
+    </script>
+</body>
+</html>
